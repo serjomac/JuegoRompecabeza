@@ -2,111 +2,78 @@
 <html>
 <head>
     <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <link href="css/main.css" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Chewy" rel="stylesheet">
     <script src="js/jquery-3.3.1.js" type="text/javascript"></script>
-    <script src="js/jquery.mobile-1.5.0-alpha.1.min.js"></script>
-<style>
-    .day {
-  border: 5px dashed transparent;
-  background: #ddd;
-  position: relative;
-}
-.day.hovering {
-  background: #b6d6fb;
-  border-color: #276cbc;
-}
-
-#e1 {
-    width : 40px;
-    height : 40px;
-    background : black;
-    position: absolute;
-    z-index: 1000;
-}
-
-#t1, #t2, #t3, #t4, #t5, #t6, #t7, #t8, #t9 {
-    width : 40px;
-    height : 40px;
-    border-style: dotted;
-    position: absolute;
-}
-
-#elementos div{
-    width : 80px;
-    height : 80px;
-    background : black;
-    position: absolute;
-    z-index: 1000;
-}
-#elementos {
-    height: 15vh;
-    background: steelblue;
-    position: relative;
-}
-
-#tablero div{
-    width : 80px;
-    height : 80px;
-    background : black;
-    position: absolute;
-
-}
-#tablero {
-    height: 100%;
-    background: steelblue;
-    position: relative;
-}
-.tablero {
-    height: 85vh;
-    background: red;
-    position: relative;
-
-}
-.triangulo{
-    position: absolute;
-}
-.rectangulo{
-    position: absolute;
-}
-.cuadrado{
-    position: absolute;
-}
-
-@media (min-width: 576px) {
-#elementos {
-    height: 100vh;
-    background: steelblue;
-    position: relative;
-}
-.tablero {
-    height: 100vh;
-    background: red;
-    position: relative;
-}
-}
-
-
-
-</style>
 </head>
-<body>
+<body class="fondo">
 
      <div class="container-fluid">
         <div class="row">
-            <div class="col-xs-12 col-sm-4">
-                <div id="elementos">
+            <div class="col-xs-12 col-sm-6">
+                <div id="elementos" class="fondoBtn">
                 </div>
-            
+
             </div>
-            <div class="col-xs-12 col-sm-8">
-                <div id="tablero">
+            <div class="col-xs-12 col-sm-6">
+                <div id="tablero" class="jumbotron">
                 </div>
             </div>
         </div>
     </div>
     
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4 footer" >
+      <div class= "collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="#"><img id="cambio" src="img/flechaAtras.png" alt=""></a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+<div id="myModal" class="modal fade fondo" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body anuncioModal modal-fondo-fail">
+        <p>Mala suerte</p>
+        <img src="img/emoji-triste.png" alt="sad">
+      </div>
+      <div class="modal-footer">
+    <!--<button id="menuPrincipalfail" type="button" class="btn btn-default" data-dismiss="modal">VOLVER PP</button>
+        <button id="intentarOtra" type="button" class="btn btn-primary">INTENTAR AGAIN</button>-->
+        
+        <a id="menuPrincipalfail" class="nav-link" href="#"><img id="cambio" src="img/home.png" alt=""></a>
+        <a id="intentarOtra" class="nav-link" href="#"><img id="cambio" src="img/repetir.png" alt=""></a>
+        
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<div id="myModal1" class="modal fade fondo" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body anuncioModal modal-fondo-win">
+        <p>¡MUY BIEN, LO LOGRASTE! AHORA TIENES <span id="miVariable"></span> PUNTOS</p>
+        <img src="img/emoji-feliz.png" alt="Smiley face">
+      </div>
+      <div class="modal-footer">
+        <!--<button id="menuPrincipalwin" type="button" class="btn btn-default" data-dismiss="modal">VOLVER PP</button>-->
+        
+        <a id="menuPrincipalwin" class="nav-link" href="#"><img id="cambio" src="img/home.png" alt=""></a>
+        
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
 
 
-<script src="script.js" type="text/javascript"></script>
+<script src="js/main.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/script.js" type="text/javascript"></script>
+
 
 </body>
 </html>
