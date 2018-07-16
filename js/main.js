@@ -41,11 +41,14 @@
 
 
 $("#slider1").click(function(){
+  $("#audioHome")[0].pause();
   var globalVariable=0
   var queryString = "?"+ globalVariable;
   window.location.href = "main.html" + queryString;
+  
 try {
     cargarArreglo();
+    
 }
 catch(err) {
     //console.log(err.message);

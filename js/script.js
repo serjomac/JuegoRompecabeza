@@ -12,10 +12,12 @@ var jsonRompecabezas = JSON.parse(strDatos);
 
 var queryString = decodeURIComponent(window.location.search);
 queryString = queryString.substring(1);
+//console.log(queryString)
 var queries = queryString.split("&");
+//console.log(queries)
 for (var i = 0; i < queries.length; i++)
 {
-  //console.log(queries[i]);
+  console.log(queries[i]);
 }
 var varGlobal = parseInt(queries);
 
@@ -94,7 +96,7 @@ catch(err) {
 
 
   function cargarArreglo() {
-
+    
     jsonRompecabezas.tablero.forEach(function(objeto) {
 
         for (var i = 0; i < objeto.cuadros.length; i++) {
@@ -164,7 +166,7 @@ for (var i = 0; i < obj.tablero.length; i++){
 */
 
 function dibujar(variable){
-
+  $("#audio"+variable)[0].play();
   arregloTablero[variable].cuadros.forEach( function(cuadro){
     //console.log(cuadro.id + " " + cuadro.posx + " " + cuadro.posy + " " + cuadro.url);
     id = "t"+cuadro.id;
