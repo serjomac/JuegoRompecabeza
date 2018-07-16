@@ -1,6 +1,6 @@
 //var item = document.getElementById( 'e1' );
-const mainDiv = document.getElementById( 'elementos' );
-const tab = document.getElementById( 'tablero' );
+const mainDiv = $( 'elementos' );
+const tab = $( 'tablero' );
 //const days = [].slice.call(document.querySelectorAll( '.day' ), 0 );
 let currentlyDragging = null;
 var contadorAciertos = 0;
@@ -30,79 +30,82 @@ var espacios = [
 ];
 
 espacios.forEach( function(espacio){
-  temp_div = document.createElement("div");
+  id = "t"+espacio.id;
+  temp_div = $('<div/>', { 'id': id });
+ 
+    
+  temp_div.css('backgroundColor', "white");
+  //temp_div.html(espacio.color)
+  temp_div.css('borderColor', espacio.color );
+  temp_div.css('left', espacio.x+ "px");
+  temp_div.css('top', espacio.y+ "px");
+  temp_div.css('width', espacio.width+ "px");
+  temp_div.css('height', espacio.height+ "px");
+  
+    
 
-  temp_div.style.backgroundColor = "white";
-   temp_div.style.borderColor = ""+espacio.color;
-  temp_div.innerHTML =""+espacio.color;
-  /*temp_div.style.width = elemento.width+ "px";
-  temp_div.style.height = elemento.height+ "px";*/
-  temp_div.style.left = espacio.x+ "px";
-  temp_div.style.top = espacio.y+ "px";
-  temp_div.setAttribute("id", "t"+espacio.id);
-  console.log(espacio);
-  tab.appendChild(temp_div);
+   $('#tablero').append(temp_div);
 
 });
 
 elementos.forEach( function(elemento){
-  temp_div = document.createElement("div");
-  temp_div.style.backgroundColor = ""+elemento.color;
-  /*temp_div.style.width = elemento.width+ "px";
-  temp_div.style.height = elemento.height+ "px";*/
-  temp_div.style.left = elemento.x+ "px";
-  temp_div.style.top = elemento.y+ "px";
-  temp_div.setAttribute("id", ""+elemento.id);
-  console.log(elemento);
-  mainDiv.appendChild(temp_div);
-  temp_div.addEventListener("touchstart", handleStart, false);
-  temp_div.addEventListener("touchend", handleEnd, false);
-  temp_div.addEventListener("touchmove", handleMove, false);
+  temp_div = $('<div/>', { 'id': elemento.id });
+  
+  temp_div.css('backgroundColor', elemento.color);
+  temp_div.css('left', elemento.x+ "px");
+  temp_div.css('top', elemento.y+ "px");
+  temp_div.css('width', elemento.width+ "px");
+  temp_div.css('height', elemento.height+ "px");
+  
+  $('#elementos').append(temp_div);
+
+    $(temp_div).on('touchstart',handleStart);
+    $(temp_div).on('touchend',handleEnd);
+    $(temp_div).on('touchmove',handleMove);
+    
+
 
 });
 
 
-/*
-  item.addEventListener("touchstart", handleStart, false);
-  item.addEventListener("touchend", handleEnd, false);
-  //item.addEventListener("touchcancel", handleCancel, false);
-  item.addEventListener("touchmove", handleMove, false);
-*/
-  function handleStart(e){
-    currentlyDragging = e.target;
-    item  = document.getElementById(""+e.target.id);
 
-    console.log("Start " + e.target.id + " " + e);
+  function handleStart(e){
+//      console.log("Hola mundo")
+    currentlyDragging = e.target;
+    item  = $(""+e.target.id);
+      
+
 
   }
   function handleEnd(e){
     currentlyDragging = e.target;
-    item  = document.getElementById(""+e.target.id);
-    tabl  = document.getElementById("t"+e.target.id);
-    console.log("Movió a " + item.style.backgroundColor);
-    console.log("Movió a " + tabl.style.borderColor);
-    //currentlyDragging.parentNode.removeChild( currentlyDragging )
-    //t1.appendChild( currentlyDragging );
-    //console.log("tamaño del cuadro " + mainDiv.offsetWidth);
+      console.log("Currentry "+currentlyDragging.id)
+    item  = $("#"+e.target.id);
+    tabl  = $("#t"+e.target.id);
+    console.log("item tiene  " + item);
+    console.log("Movio a " + item.css("background-color"));
+    console.log("Movio a " + tabl.css("border-color"));
     
-    var movimiento = (parseInt(mainDiv.offsetWidth) - parseInt(item.style.left) + 30)*-1;
+    
+    var movimiento = (parseInt($("#elementos").width()) - parseInt(item.css("left")) + 30)*-1;
+    console.log("mov: "  + item.css("left"))
     //console.log(movimiento);
     posxElemento = movimiento;
-    posyElemento = parseInt(item.style.top);
-    posxRecuadro = parseInt(tabl.style.left);
-    posyRecuadro = parseInt(tabl.style.top);
+    posyElemento = parseInt(item.css("top"));
+    posxRecuadro = parseInt(tabl.css("left"));
+    posyRecuadro = parseInt(tabl.css("top"));
 
-    posfinal = posxRecuadro + parseInt(mainDiv.offsetWidth) + 30;
+    posfinal = posxRecuadro + parseInt($("#elementos").width()) + 30;
 
 
     if (((posxRecuadro -10) <= posxElemento) && ((posxRecuadro + 10) >= posxElemento) && ((posyRecuadro -10) <= posyElemento) && ((posyRecuadro + 10) >= posyElemento)){
       console.log("Bien hecho!");
-      item.style.left = posfinal + 'px';
-      item.style.top = posyRecuadro + 'px';
-      item.removeEventListener("touchstart", handleStart, false);
-      item.removeEventListener("touchend", handleEnd, false);
-      item.removeEventListener("touchcancel", handleCancel, false);
-      item.removeEventListener("touchmove", handleMove, false);
+      item.css("left",  posfinal + 'px') ;
+      item.css("top",  posyRecuadro + 'px') ;
+      item.off("touchstart", handleStart, false);
+      item.off("touchend", handleEnd, false);
+      item.off("touchcancel", handleCancel, false);
+      item.off("touchmove", handleMove, false);
       contadorAciertos++;
       if (contadorAciertos == 9){
         alert("GANASTE");
@@ -114,22 +117,14 @@ elementos.forEach( function(elemento){
       //elementos.appendChild( currentlyDragging );
       //item.style.left = 1 + 'px';
       //item.style.top = 1 + 'px';
-      item.style.left = elementos[e.target.id-1].x + 'px';
-      item.style.top = elementos[e.target.id-1].y + 'px';
+      item.css("left", elementos[e.target.id-1].x + 'px');
+      item.css("top", elementos[e.target.id-1].y + 'px') ;
       contadorErrores++;
       if (contadorErrores == 15){
         alert("PERDISTE");
       }
     }
 
-
-
-    //var x = parseInt(item.style.left);
-    //var y = parseInt(item.style.top);
-
-      //currentlyDragging.parentNode.removeChild(currentlyDragging );
-      //elementos.appendChild( currentlyDragging );
-      
 
 
 
@@ -139,17 +134,15 @@ elementos.forEach( function(elemento){
       console.log("Cancel " +e);
     }
     function handleMove(e){
-
-
+        
+        
         var touchLocation = e.targetTouches[0];
-        item.style.left = touchLocation.clientX + 'px';
-        item.style.top = touchLocation.clientY + 'px';
-
-
-
-        //console.log(touchLocation);
-
-      //console.log("Move " +e.target);
+        //console.log("touche es: " + touchLocation)
+        console.log(touchLocation.clientX)
+        $("#"+ e.target.id).css("left", touchLocation.clientX + 'px');
+        //console.log(item.css("left", touchLocation.clientX + 'px'))
+        $("#"+ e.target.id).css("top", touchLocation.clientY + 'px');
+        
     }
 
 
